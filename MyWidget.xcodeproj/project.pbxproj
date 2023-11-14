@@ -14,6 +14,8 @@
 		C473003D2B03ADE700F2F8F6 /* MyWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473003C2B03ADE700F2F8F6 /* MyWidgetTests.swift */; };
 		C47300472B03ADE700F2F8F6 /* MyWidgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47300462B03ADE700F2F8F6 /* MyWidgetUITests.swift */; };
 		C47300492B03ADE700F2F8F6 /* MyWidgetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47300482B03ADE700F2F8F6 /* MyWidgetUITestsLaunchTests.swift */; };
+		C47300562B03CAB500F2F8F6 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47300552B03CAB500F2F8F6 /* Network.swift */; };
+		C47300582B03CAD800F2F8F6 /* JahiaHealthCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47300572B03CAD800F2F8F6 /* JahiaHealthCheck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,10 @@
 		C47300422B03ADE700F2F8F6 /* MyWidgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWidgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47300462B03ADE700F2F8F6 /* MyWidgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetUITests.swift; sourceTree = "<group>"; };
 		C47300482B03ADE700F2F8F6 /* MyWidgetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWidgetUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C47300552B03CAB500F2F8F6 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C47300572B03CAD800F2F8F6 /* JahiaHealthCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JahiaHealthCheck.swift; sourceTree = "<group>"; };
+		C47300592B03CB1900F2F8F6 /* JahiaHealthCheck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JahiaHealthCheck.json; sourceTree = "<group>"; };
+		C473005A2B03D6A000F2F8F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +101,15 @@
 		C47300292B03ADE600F2F8F6 /* MyWidget */ = {
 			isa = PBXGroup;
 			children = (
+				C473005A2B03D6A000F2F8F6 /* Info.plist */,
 				C473002A2B03ADE600F2F8F6 /* MyWidgetApp.swift */,
 				C473002C2B03ADE600F2F8F6 /* ContentView.swift */,
 				C473002E2B03ADE700F2F8F6 /* Assets.xcassets */,
 				C47300302B03ADE700F2F8F6 /* MyWidget.entitlements */,
 				C47300312B03ADE700F2F8F6 /* Preview Content */,
+				C47300552B03CAB500F2F8F6 /* Network.swift */,
+				C47300572B03CAD800F2F8F6 /* JahiaHealthCheck.swift */,
+				C47300592B03CB1900F2F8F6 /* JahiaHealthCheck.json */,
 			);
 			path = MyWidget;
 			sourceTree = "<group>";
@@ -261,6 +271,8 @@
 			files = (
 				C473002D2B03ADE600F2F8F6 /* ContentView.swift in Sources */,
 				C473002B2B03ADE600F2F8F6 /* MyWidgetApp.swift in Sources */,
+				C47300582B03CAD800F2F8F6 /* JahiaHealthCheck.swift in Sources */,
+				C47300562B03CAB500F2F8F6 /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +436,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyWidget/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,6 +475,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyWidget/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

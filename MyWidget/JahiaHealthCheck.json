@@ -1,0 +1,18 @@
+{
+    "duration":"1ms",
+    "registeredProbes":5,
+    "probes":
+    {
+        "Datastore":
+        {
+            "severity":"CRITICAL",
+            "status":"GREEN"
+        },
+        "DBConnectivity":
+        {
+            "severity":"CRITICAL",
+            "status":"GREEN"
+        }
+    },
+    "status":"GREEN"
+}
