@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+struct GrowingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(10)
+            .background(.blue)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+
+struct Refresher: View {
+    @Environment(\.refresh) private var refresh // 1
+    
+    var body: some View {
+        VStack {
+            if let refresh = refresh { // 2
+                Button("Refresh") {
+                    Task {
+                        await refresh() // 1
+                    }
+                }
+                .buttonStyle(GrowingButton())
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @EnvironmentObject var network: Network
 
@@ -52,12 +81,12 @@ struct ContentView: View {
         let dBConnectivity = healthcheck.probes.DBConnectivity
         let dBConnectivitySeverity = dBConnectivity.severity
         let dBConnectivityStatus = dBConnectivity.status
-        let dBConnectivityStatusEnum : Status = Status(rawValue: dBConnectivityStatus) ?? Status.GREEN
+        //let dBConnectivityStatusEnum : Status = Status(rawValue: dBConnectivityStatus) ?? Status.GREEN
 
         let datastore = healthcheck.probes.Datastore
         let datastoreSeverity = datastore.severity
         let datastoreStatus = datastore.status
-        let datastoreStatusEnum : Status = Status(rawValue: datastoreStatus) ?? Status.GREEN
+        //let datastoreStatusEnum : Status = Status(rawValue: datastoreStatus) ?? Status.GREEN
         
         ScrollView {
             Text("Jahia HealthCheck")
@@ -83,12 +112,18 @@ struct ContentView: View {
                         .bold()
                     Text("\(datastoreSeverity) (\(datastoreStatus))")
                 }.background(getColor(statusEnum).colorInvert())
+                
             }.foregroundStyle(color).colorInvert()
             .frame(maxWidth: .infinity, alignment: .center)
             .safeAreaPadding(10)
             .background(color)
             .cornerRadius(20)
-        
+            Refresher() // 1
+               .refreshable {
+                   print("Refresh Button clicked")
+                   network.getHealthCheck() // 1
+               }
+            Refresher() // 2
         }
         .padding(.vertical)
         .onAppear {
