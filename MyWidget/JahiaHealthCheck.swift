@@ -34,19 +34,54 @@ enum Status : String {
     case RED = "RED"
 }
 
-struct JahiaHealthCheck: Decodable {
+struct JahiaHealthCheck: Hashable, Codable {
+    
     var duration: String
     var registeredProbes: Int
+    var probes: ProbesType
+    var status: String
     
-    struct probes: Decodable {
-        struct Datastore: Decodable {
+    struct ProbesType: Codable {
+        var Datastore: DatastoreType
+        var DBConnectivity: DBConnectivityType
+        
+        struct DatastoreType: Codable {
             var severity: String
             var status: String
+            init() {
+                self.severity = "SEVERE"
+                self.status = "TEST"
+            }
         }
-        struct DBConnectivity: Decodable {
+        struct DBConnectivityType: Codable {
             var severity: String
             var status: String
+            init() {
+                self.severity = "SEVERE"
+                self.status = "TEST"
+            }
+        }
+        
+        init() {
+            self.Datastore = DatastoreType.init()
+            self.DBConnectivity = DBConnectivityType.init()
         }
     }
-    var status: String
+    
+    init() {
+        self.duration = "xxxms"
+        self.registeredProbes = 0
+        self.probes = ProbesType.init()
+        self.status = "DEFAULT"
+
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        return
+    }
+    
+    static func == (lhs: JahiaHealthCheck, rhs: JahiaHealthCheck) -> Bool {
+        return false
+    }
 }
+

@@ -12,10 +12,18 @@ import SwiftUI
 
 
 class Network: ObservableObject {
-
-    @Published var healthchecks: JahiaHealthCheck = JahiaHealthCheck.init(duration: "0ms", registeredProbes: 0, status: "DEFAULT")
-
     
+    /*
+    var probesType : JahiaHealthCheck.ProbesType = JahiaHealthCheck.ProbesType.init(Datastore: datastore, DBConnectivity: dBConnectivity)
+    var datastore : JahiaHealthCheck.ProbesType.DatastoreType = JahiaHealthCheck.ProbesType.DatastoreType.init(severity: "CRITICAL", status: "GREEN")
+    var dBConnectivity : JahiaHealthCheck.ProbesType.DBConnectivityType = JahiaHealthCheck.ProbesType.DBConnectivityType.init(severity: "CRITICAL", status: "GREEN")
+    
+    @Published var healthchecks: [JahiaHealthCheck] = [JahiaHealthCheck.init(duration: "0ms", registeredProbes: 0, probes: probesType, status: "DEFAULT")]
+    */
+
+    @Published var healthchecks: JahiaHealthCheck = JahiaHealthCheck.init()
+
+
     func getHealthCheck() {
         guard let url = URL(string: "https://geoportail.wallonie.be/healthcheck?token=OGKLMRSDAipviaipIEiieYvuL", encodingInvalidCharacters: true ) else { fatalError("Missing URL") }
 
@@ -33,8 +41,12 @@ class Network: ObservableObject {
                 guard let data = data else { return }
                 DispatchQueue.main.async {
                     do {
-                        let decodedChecks = try JSONDecoder().decode(JahiaHealthCheck.self, from: data)
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let decodedChecks = try decoder.decode(JahiaHealthCheck.self, from: data)
                         self.healthchecks = decodedChecks
+                        
+                        print("healthchecks", self.healthchecks )
                     } catch let error {
                         print("Error decoding: ", error)
                     }
